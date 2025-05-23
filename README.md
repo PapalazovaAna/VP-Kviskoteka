@@ -23,25 +23,59 @@
 ## Објаснување за некои функции  
 *newGame()* – ја има во секоја од формите MojBroj.cs,  Kvizomanija.cs и BrziSimboli.cs и ги поставува почетните вредности на променливите во формите и на секоја контрола од кога ќе притиснеме на Старт. Функцијата се повикува и кога од крајниот дијалог играчот ќе одбере да игра повторно.  
 *count()* – се наоѓа во формата BrziSimboli.cs и се повикува при секој клик на копчето ОК. Прави проверка за тоа колку симболи се на точно место (truePosition), а и колку ги има но се на погрешно место (falsePosition). Бидејќи можно е еден симбол да го има повеќе пати во една низа, за да добијам точни вредности искористив две помошни листи, temp1 и temp2 кои чуваат вредност 0 или 1 за секој елемент во targetArray и yourChosenRow, соодветно. Вредноста е 1 ако конкретниот елемент не е поврзан со некој елемент од другата листа, во спротивно вредноста е 0.  
-![image](https://github.com/user-attachments/assets/cb3f8b2c-37ed-4849-80ce-8fd310949012)  
+```csharp
+private List<int> count()
+{
+    List<int> temp1 = new List<int>() {1, 1, 1, 1};
+    List<int> temp2 = new List<int>() {1, 1, 1, 1};
+
+    int truePosition = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        if (targetArray[i] == yourChosenRow[i])
+        {
+            truePosition++;
+            temp1[i] = 0;
+            temp2[i] = 0;
+        }
+    }
+
+    int falsePosition = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (i == j) continue;
+
+            if (yourChosenRow[i] == targetArray[j] && temp1[i] != 0 && temp2[j] != 0)
+            {
+                falsePosition++;
+                temp1[i] = 0;
+                temp2[j] = 0;
+            }
+        }
+    }
+    return new List<int> { truePosition, falsePosition };
+}
+``` 
 
 ## Изглед  
 Почетен изглед на играта:  
-![image](https://github.com/user-attachments/assets/36f070e9-da92-4fd3-921e-e2abd6c6c67d)  
+![image](images/start_appearance.png)  
 
 Мој број по клик на Крај:  
-![image](https://github.com/user-attachments/assets/e537155b-baff-4484-b5d1-e9c70a346065)  
+![image](images/moj_broj.png)  
 
 Квизоманија:  
-![image](https://github.com/user-attachments/assets/cee2eb1c-9350-4c55-9b5f-850859c4b8de)  
+![image](images/kvizomanija_start.png)  
 
 Квизоманија од кога ќе ја завршиме играта:  
-![image](https://github.com/user-attachments/assets/8d051d8f-5217-4f36-83ac-9770daf62bca)  
+![image](images/kvizomanija_end.png)  
 
 Брзи симболи:  
-![image](https://github.com/user-attachments/assets/92434ad6-179f-4227-b024-a7039144a090)  
+![image](images/brzi_simboli_start.png)  
  
 Брзи симболи од кога ќе ја завршиме играта:  
-![image](https://github.com/user-attachments/assets/5ffca10f-9f3a-445c-ba54-1b79ef29a3f2)
+![image](images/brzi_simboli_end.png)
 
 
